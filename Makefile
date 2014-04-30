@@ -1,7 +1,12 @@
-all: sample index.html
+all: samples index.html
 
 sample:
-	@mkdir -p sample
+	mkdir sample
+
+sample/content: sample
+	cd sample; ln -s ../content
+
+samples: sample
 	@i=0; for line in `find src -name example.js |nl -s '":"'`; do \
 		let i=$${i}+1;\
 		echo {\"data\":{\"$${line}\"}} \
